@@ -10,6 +10,7 @@ import { ProduitService } from './../services/produit.service';
 export class AddProduitComponent implements OnInit {
 
     newProduit = new Produit();
+    message?: string;
 
     constructor(private produitService: ProduitService) { }
 
@@ -17,12 +18,8 @@ export class AddProduitComponent implements OnInit {
     }
 
     addProduit() {
-      //console.log(this.newProduit);
-      // this.newProduit.dateCreation = new Date();
-      // this.newProduit.idProduit = this.produits.length + 1;
-      // this.produits.push(this.newProduit);
-      // this.newProduit = new Produit();
       this.produitService.ajouterProduit(this.newProduit);
+      this.message = `Produit ${this.newProduit.nomProduit} ajouté avec succès !`;
     }
 
 }

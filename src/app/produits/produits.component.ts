@@ -8,11 +8,21 @@ import { ProduitService } from './../services/produit.service';
   styleUrls: ['./produits.component.css'],
 })
 export class ProduitsComponent implements OnInit {
-  produits: Produit[];
+  produits?: Produit[];
 
   constructor(private produitService: ProduitService) {
-    this.produits = produitService.listeProduits();
+
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.produits = this.produitService.listeProduits();
+  }
+
+  supprimerProduit(prod: Produit) {
+    let conf = confirm('Etes-vous sûr ?');
+    if (conf)
+      this.produitService.supprimerProduit(prod);
+  }
+
+
 }
