@@ -13,7 +13,7 @@ export class AddProduitComponent implements OnInit {
     newProduit = new Produit();
     message?: string;
     categories?: Categorie[];
-    newIdCat?: number;
+    newIdCat!: number;
     newCategorie?: Categorie;
 
     constructor(private produitService: ProduitService) { }
@@ -23,6 +23,8 @@ export class AddProduitComponent implements OnInit {
     }
 
     addProduit() {
+      this.newCategorie = this.produitService.consulterCategorie(this.newIdCat);
+      this.newProduit.categorie = this.newCategorie;
       this.produitService.ajouterProduit(this.newProduit);
       this.message = `Produit ${this.newProduit.nomProduit} ajouté avec succès !`;
     }
