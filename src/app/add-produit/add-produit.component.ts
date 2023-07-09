@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Produit } from './../model/produit.model';
 import { ProduitService } from './../services/produit.service';
 import { Categorie } from './../model/categorie.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-produit',
@@ -16,7 +17,7 @@ export class AddProduitComponent implements OnInit {
     newIdCat!: number;
     newCategorie?: Categorie;
 
-    constructor(private produitService: ProduitService) { }
+    constructor(private produitService: ProduitService,private router: Router) { }
 
     ngOnInit(): void {
       this.categories = this.produitService.listerCategories();
@@ -27,6 +28,7 @@ export class AddProduitComponent implements OnInit {
       this.newProduit.categorie = this.newCategorie;
       this.produitService.ajouterProduit(this.newProduit);
       this.message = `Produit ${this.newProduit.nomProduit} ajouté avec succès !`;
+      this.router.navigate(['produits']);
     }
 
 }

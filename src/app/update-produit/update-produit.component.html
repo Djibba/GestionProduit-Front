@@ -1,5 +1,5 @@
 <div class="container">
-  <hr>
+  <hr />
   <div><h2>Modifier un Produit :</h2></div>
   <form>
     <div class="col-sm-2 col-md-2 col-lg-2">
@@ -39,6 +39,19 @@
         name="dateCreation"
         class="form-control"
       />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Catégories</label>
+      <select
+        class="form-control form-control-lg"
+        id="idCat"
+        name="idCat"
+        [(ngModel)]="updatedCatId"
+      >
+        <option *ngFor="let cat of categories" [value]="cat.idCat">
+          {{ cat.nomCat }}
+        </option>
+      </select>
     </div>
     <div class="mt-2">
       <button type="submit" (click)="updateProduit()" class="btn btn-success">
