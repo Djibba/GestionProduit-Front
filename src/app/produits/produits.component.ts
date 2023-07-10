@@ -15,6 +15,10 @@ export class ProduitsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.chargerProduits();
+  }
+
+  chargerProduits() {
     this.produitService.listeProduits().subscribe(
       produits => {
         this.produits = produits;
@@ -25,10 +29,13 @@ export class ProduitsComponent implements OnInit {
     );
   }
 
+
   supprimerProduit(prod: Produit) {
     let conf = confirm('Etes-vous sûr ?');
     if (conf)
-      this.produitService.supprimerProduit(prod);
+      this.produitService.supprimerProduit(prod.idProduit!).subscribe(() => {
+          this.chargerProduits();
+        });
   }
 
 

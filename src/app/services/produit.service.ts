@@ -30,11 +30,12 @@ export class ProduitService {
       return this.http.post<Produit>(this.apiUrl + '/create', prod, httpOptions);
     }
 
-    supprimerProduit( prod: Produit){
-      const index = this.produits.indexOf(prod, 0);
-      if (index > -1) {
-        this.produits.splice(index, 1);
-      }
+    supprimerProduit( id: number){
+      return this.http.delete<Produit>(this.apiUrl + `/delete/${id}`, httpOptions);
+      // const index = this.produits.indexOf(prod, 0);
+      // if (index > -1) {
+      //   this.produits.splice(index, 1);
+      // }
       //ou Bien
       // this.produits.forEach((cur, index) => {
       //   if(prod.idProduit === cur.idProduit) {
@@ -61,7 +62,7 @@ export class ProduitService {
 
 
     updateProduit(p:Produit) {
-      this.supprimerProduit(p);
+      this.supprimerProduit(p.idProduit!);
       this.ajouterProduit(p);
       this.trierProduits();
     }
