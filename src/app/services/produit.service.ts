@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Produit } from './../model/produit.model';
 import { Categorie } from './../model/categorie.model';
+import { apiUrl } from '../config';
 
 const httpOptions = {
   headers: new HttpHeaders( {'Content-Type': 'application/json'} )
@@ -14,7 +15,6 @@ const httpOptions = {
 })
 export class ProduitService {
 
-  apiUrl: string = 'http://localhost:8080/produits/api';
   produits!: Produit[];
   // categories: Categorie[];
 
@@ -23,15 +23,15 @@ export class ProduitService {
    }
 
     listeProduits(): Observable<Produit[]>{
-      return this.http.get<Produit[]>(this.apiUrl);
+      return this.http.get<Produit[]>(apiUrl);
     }
 
     ajouterProduit( prod: Produit): Observable<Produit>{
-      return this.http.post<Produit>(this.apiUrl + '/create', prod, httpOptions);
+      return this.http.post<Produit>(apiUrl + '/create', prod, httpOptions);
     }
 
     supprimerProduit( id: number){
-      return this.http.delete<Produit>(this.apiUrl + `/delete/${id}`, httpOptions);
+      return this.http.delete<Produit>(apiUrl + `/delete/${id}`, httpOptions);
       // const index = this.produits.indexOf(prod, 0);
       // if (index > -1) {
       //   this.produits.splice(index, 1);
@@ -45,7 +45,7 @@ export class ProduitService {
     }
 
     consulterProduit(id:number): Observable<Produit> {
-      return this.http.get<Produit>(this.apiUrl + `/${id}`);
+      return this.http.get<Produit>(apiUrl + `/${id}`);
     }
 
     trierProduits() {
@@ -62,14 +62,14 @@ export class ProduitService {
 
 
     updateProduit(p:Produit) {
-      return this.http.put<Produit>(this.apiUrl + '/update', p, httpOptions);
+      return this.http.put<Produit>(apiUrl + '/update', p, httpOptions);
     }
 
     listerCategories(): Observable<Categorie[]> {
-      return this.http.get<Categorie[]>(this.apiUrl + '/cat');
+      return this.http.get<Categorie[]>(apiUrl + '/cat');
     }
 
     consulterCategorie(id:number): Observable<Categorie> {
-      return this.http.get<Categorie>(this.apiUrl + `/cat/${id}`);
+      return this.http.get<Categorie>(apiUrl + `/cat/${id}`);
     }
 }
