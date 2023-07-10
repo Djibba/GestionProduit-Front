@@ -7,26 +7,32 @@ import { Categorie } from './../model/categorie.model';
 @Component({
   selector: 'app-update-produit',
   templateUrl: './update-produit.component.html',
-  styleUrls: ['./update-produit.component.css']
+  styleUrls: ['./update-produit.component.css'],
 })
 export class UpdateProduitComponent implements OnInit {
-
   currentProduit = new Produit();
   categories!: Categorie[];
   updatedCatId!: number;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private produitService: ProduitService) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private produitService: ProduitService
+  ) {}
 
   ngOnInit(): void {
-    // this.categories = this.produitService.listerCategories();
-    this.currentProduit = this.produitService.consulterProduit(this.activatedRoute.snapshot.params['id']);
-    this.updatedCatId = this.currentProduit.categorie!.idCat;
+    this.produitService
+      .consulterProduit(this.activatedRoute.snapshot.params['id'])
+      .subscribe((prod) => {
+        this.currentProduit = prod;
+      });
+
   }
 
   updateProduit() {
     // this.currentProduit.categorie = this.produitService.consulterCategorie(this.updatedCatId);
-    this.produitService.updateProduit(this.currentProduit);
-    this.router.navigate(['produits']);
+    this.produitService.updateProduit(this.currentProduit).subscribe((prod) => {
+      this.router.navigate(['produits']);
+    });
   }
 }
-

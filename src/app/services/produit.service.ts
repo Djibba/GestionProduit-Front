@@ -44,8 +44,8 @@ export class ProduitService {
       // });
     }
 
-    consulterProduit(id:number): Produit {
-      return this.produits.find(p => p.idProduit == id)!;
+    consulterProduit(id:number): Observable<Produit> {
+      return this.http.get<Produit>(this.apiUrl + `/${id}`);
     }
 
     trierProduits() {
@@ -62,9 +62,7 @@ export class ProduitService {
 
 
     updateProduit(p:Produit) {
-      this.supprimerProduit(p.idProduit!);
-      this.ajouterProduit(p);
-      this.trierProduits();
+      return this.http.put<Produit>(this.apiUrl + '/update', p, httpOptions);
     }
 
     // listerCategories(): Categorie[] {
