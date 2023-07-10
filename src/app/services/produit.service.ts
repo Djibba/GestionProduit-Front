@@ -1,54 +1,33 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { Produit } from './../model/produit.model';
 import { Categorie } from './../model/categorie.model';
+
+const httpOptions = {
+  headers: new HttpHeaders( {'Content-Type': 'application/json'} )
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProduitService {
 
-  produits: Produit[];
-  categories: Categorie[];
+  apiUrl: string = 'http://localhost:8080/produits/api';
+  produits!: Produit[];
+  // categories: Categorie[];
 
-  constructor() {
+  constructor(private http: HttpClient) {
 
-    this.categories = [
-      {idCat: 1, nomCat: 'Ordinateurs'},
-      {idCat: 2, nomCat: 'Imprimantes'},
-      {idCat: 3, nomCat: 'Smartphones'},
-    ];
-
-    this.produits = [
-      {
-        idProduit: 1,
-        nomProduit: 'PC Asus',
-        prixProduit: 3000.6,
-        dateCreation: new Date('01/14/2011'),
-        categorie: this.categories[0]
-      },
-      {
-        idProduit: 2,
-        nomProduit: 'Imprimante Epson',
-        prixProduit: 450,
-        dateCreation: new Date('12/17/2010'),
-        categorie: this.categories[1]
-      },
-      {
-        idProduit: 3,
-        nomProduit: 'Tablette Samsung',
-        prixProduit: 900.123,
-        dateCreation: new Date('02/20/2020'),
-        categorie: this.categories[2]
-      },
-    ];
    }
 
-    listeProduits(): Produit[] {
-      return this.produits;
+    listeProduits(): Observable<Produit[]>{
+      return this.http.get<Produit[]>(this.apiUrl);
     }
 
-    ajouterProduit( prod: Produit){
-      this.produits.push(prod);
+    ajouterProduit( prod: Produit): Observable<Produit>{
+      return this.http.post<Produit>(this.apiUrl + '/create', prod, httpOptions);
     }
 
     supprimerProduit( prod: Produit){
@@ -87,11 +66,11 @@ export class ProduitService {
       this.trierProduits();
     }
 
-    listerCategories(): Categorie[] {
-      return this.categories;
-    }
+    // listerCategories(): Categorie[] {
+    //   return this.categories;
+    // }
 
-    consulterCategorie(id:number): Categorie {
-      return this.categories.find(c => c.idCat == id)!;
-    }
+    // consulterCategorie(id:number): Categorie {
+    //   return this.categories.find(c => c.idCat == id)!;
+    // }
 }
