@@ -65,11 +65,11 @@ export class ProduitService {
       return this.http.put<Produit>(this.apiUrl + '/update', p, httpOptions);
     }
 
-    // listerCategories(): Categorie[] {
-    //   return this.categories;
-    // }
+    listerCategories(): Observable<Categorie[]> {
+      return this.http.get<Categorie[]>(this.apiUrl + '/cat');
+    }
 
-    // consulterCategorie(id:number): Categorie {
-    //   return this.categories.find(c => c.idCat == id)!;
-    // }
+    consulterCategorie(id:number): Observable<Categorie> {
+      return this.http.get<Categorie>(this.apiUrl + `/cat/${id}`);
+    }
 }
