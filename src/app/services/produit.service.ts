@@ -77,4 +77,8 @@ export class ProduitService {
     rechercheParCategorie(id:number): Observable<Produit[]> {
       return this.http.get<Produit[]>(apiUrl + `/prodsCat/${id}`);
     }
+
+    rechercheParNom(nom:string): Observable<Produit[]> {
+      return this.http.get<Produit[]>(apiUrl + `/prodsByNom/${nom}`);
+    }
 }
