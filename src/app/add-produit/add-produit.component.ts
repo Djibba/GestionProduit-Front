@@ -20,8 +20,8 @@ export class AddProduitComponent implements OnInit {
     constructor(private produitService: ProduitService,private router: Router) { }
 
     ngOnInit(): void {
-      this.produitService.listerCategories().subscribe(cat => {
-        this.categories = cat;
+      this.produitService.listerCategories().subscribe(cats => {
+        this.categories = cats._embedded.categories;
       });
     }
 

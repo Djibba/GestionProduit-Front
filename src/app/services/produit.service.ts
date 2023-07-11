@@ -4,7 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Produit } from './../model/produit.model';
 import { Categorie } from './../model/categorie.model';
-import { apiUrl } from '../config';
+import { apiUrl, apiUrlCat } from '../config';
+import { CategorieWrapped } from './../model/categorieWrapped.model';
 
 const httpOptions = {
   headers: new HttpHeaders( {'Content-Type': 'application/json'} )
@@ -65,11 +66,15 @@ export class ProduitService {
       return this.http.put<Produit>(apiUrl + '/update', p, httpOptions);
     }
 
-    listerCategories(): Observable<Categorie[]> {
-      return this.http.get<Categorie[]>(apiUrl + '/cat');
+    listerCategories(): Observable<CategorieWrapped> {
+      return this.http.get<CategorieWrapped>(apiUrlCat);
     }
 
     consulterCategorie(id:number): Observable<Categorie> {
-      return this.http.get<Categorie>(apiUrl + `/cat/${id}`);
+      return this.http.get<Categorie>(apiUrlCat + `/${id}`);
+    }
+
+    rechercheParCategorie(id:number): Observable<Produit[]> {
+      return this.http.get<Produit[]>(apiUrl + `/prodsCat/${id}`);
     }
 }

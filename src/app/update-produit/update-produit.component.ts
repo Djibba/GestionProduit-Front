@@ -22,7 +22,7 @@ export class UpdateProduitComponent implements OnInit {
 
   ngOnInit(): void {
     this.produitService.listerCategories().subscribe((cats) => {
-      this.categories = cats;
+      this.categories = cats._embedded.categories;
     });
     this.produitService
       .consulterProduit(this.activatedRoute.snapshot.params['id'])
