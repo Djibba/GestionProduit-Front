@@ -11,19 +11,33 @@ export class RechercheParNomComponent implements OnInit {
 
   nomProduit!: string;
   produits!: Produit[];
-
+  searchTerm!: string;
+  allProduits!: Produit[];
   constructor(private produitService: ProduitService) { }
 
   ngOnInit(): void {
 
-  }
-
-  rechercherProds(){
-    this.produitService.rechercheParNom(this.nomProduit).subscribe(
+    this.produitService.listeProduits().subscribe(
       data => {
         this.produits = data;
       }
     );
+
   }
+
+  onKeyUp(filterText: string) {
+    this.produits = this.allProduits.filter(
+      item => item.nomProduit?.toLowerCase().includes(filterText.toLowerCase())
+    );
+  }
+
+
+  // rechercherProds(){
+  //   this.produitService.rechercheParNom(this.nomProduit).subscribe(
+  //     data => {
+  //       this.produits = data;
+  //     }
+  //   );
+  // }
 
 }

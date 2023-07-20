@@ -10,6 +10,7 @@ import { AddProduitComponent } from './add-produit/add-produit.component';
 import { UpdateProduitComponent } from './update-produit/update-produit.component';
 import { RechercheParCategorieComponent } from './recherche-par-categorie/recherche-par-categorie.component';
 import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.
     AddProduitComponent,
     UpdateProduitComponent,
     RechercheParCategorieComponent,
-    RechercheParNomComponent
+    RechercheParNomComponent,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,

@@ -1,13 +1,15 @@
 <div class="container">
-  <div class="col-sm-4 col-md-8 col-lg-6 mb-4">
+  <div class="col-sm-4 col-md-8 col-lg-8 mb-4">
     <hr />
     <label>Nom Produits </label>
 
     <nav class="navbar navbar-light bg-light">
-      <form class="form-inline">
+      <!-- search bottom -->
+      <!-- <form class="form-inline">
         <input
           class="form-control mr-sm-2"
           type="search"
+          placeholder="Search"
           [(ngModel)]="nomProduit"
           name="nomProduit"
         />
@@ -18,6 +20,29 @@
         >
           Recherche
         </button>
+      </form> -->
+
+      <!-- search keyup -->
+      <!-- <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2">
+          <input
+            class="form-control"
+            #searchTerm
+            (keyup)="onKeyUp(searchTerm.value)"
+          />
+        </div>
+      </form> -->
+
+      <!-- search pipe -->
+      <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2">
+          <input
+            #nom
+            [(ngModel)]="searchTerm"
+            name="searchTerm"
+            class="form-control"
+          />
+        </div>
       </form>
     </nav>
   </div>
@@ -33,7 +58,7 @@
           <th>Date Création</th>
           <th>Catégorie</th>
         </tr>
-        <tbody *ngFor="let produit of produits">
+        <tbody *ngFor="let produit of produits | searchFilter: searchTerm">
           <tr>
             <td>{{ produit.idProduit }}</td>
             <td>{{ produit.nomProduit }}</td>
