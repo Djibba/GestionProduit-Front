@@ -1,0 +1,24 @@
+<div class="container">
+  <hr>
+  <div><h2>Liste des Categories</h2></div>
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nom Catégorie</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let cat of categories">
+          <tr>
+            <td>{{ cat.idCat }}</td>
+            <td>{{ cat.nomCat }}</td>
+            <td>{{ cat.descriptionCat }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
