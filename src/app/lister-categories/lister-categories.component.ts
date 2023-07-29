@@ -11,6 +11,8 @@ export class ListerCategoriesComponent implements OnInit {
 
   categories!: Categorie[];
 
+  updateCategorie: Categorie = {"idCat": 0, "nomCat": "", "descriptionCat": ""};
+
   constructor(private produitService: ProduitService) { }
 
   ngOnInit(): void {
