@@ -1,7 +1,7 @@
 <form>
   <div>
     <label>ID Catégorie</label>
-    <input
+    <input readonly
       type="text"
       [(ngModel)]="categorie.idCat"
       name="idCategorie"
@@ -18,6 +18,16 @@
       placeholder="Entrez un nom de catégorie..."
     />
   </div>
+  <div>
+    <label>Description Catégorie</label>
+    <input
+      type="textarea"
+      [(ngModel)]="categorie.descriptionCat"
+      name="descriptionCategorie"
+      class="form-control"
+      placeholder="Entrez une descriotion du catégorie..."
+    />
+  </div>
   <div class="mt-2">
     <button
       type="submit"
@@ -25,7 +35,7 @@
       class="btn btn-success"
       (click)="saveCategorie()"
     >
-      Ajouter
+    {{ajout ? 'Ajouter' : 'Modifier'}}
     </button>
   </div>
 </form>

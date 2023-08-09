@@ -67,7 +67,7 @@ export class ProduitService {
     }
 
     ajouterCategorie( cat: Categorie): Observable<Categorie>{
-      return this.http.post<Categorie>(apiUrlCat + '/', cat, httpOptions);
+      return this.http.post<Categorie>(apiUrlCat, cat, httpOptions);
     }
 
     listerCategories(): Observable<CategorieWrapped> {

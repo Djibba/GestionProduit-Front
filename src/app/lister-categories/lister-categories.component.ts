@@ -13,9 +13,15 @@ export class ListerCategoriesComponent implements OnInit {
 
   updateCategorie: Categorie = {"idCat": 0, "nomCat": "", "descriptionCat": ""};
 
+  ajout: boolean = true;
+
   constructor(private produitService: ProduitService) { }
 
   ngOnInit(): void {
+    this.chargerCategorie();
+  }
+
+  chargerCategorie() {
     this.produitService.listerCategories().subscribe(
       data => {
         this.categories = data._embedded.categories;
@@ -23,5 +29,15 @@ export class ListerCategoriesComponent implements OnInit {
     );
   }
 
-}
+  categorieUpdated(categorie: Categorie) {
+    this.produitService.ajouterCategorie(categorie).subscribe(
+      () => this.chargerCategorie()
+    );
+  }
 
+  updateCat(categorie: Categorie) {
+    this.updateCategorie = categorie;
+    this.ajout = false;
+  }
+
+}

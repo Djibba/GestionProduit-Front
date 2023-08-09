@@ -12,6 +12,8 @@ export class UpdateCategorieComponent implements OnInit {
 
   @Output() categorieUpdated = new EventEmitter<Categorie>();
 
+  @Input() ajout! : boolean;
+
   constructor() { }
 
   ngOnInit(): void {
