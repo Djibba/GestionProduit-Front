@@ -15,7 +15,6 @@ export class AuthService implements OnInit {
   public isLoggedIn!: boolean;
   public roles!: string[];
 
-
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
@@ -31,6 +30,8 @@ export class AuthService implements OnInit {
         this.loggedUser = curUser.username;
         this.isLoggedIn = true;
         this.roles = curUser.roles;
+        localStorage.setItem('loggedUser', this.loggedUser);
+        localStorage.setItem('isloggedIn', String(this.isLoggedIn));
       }
     });
     return validUser;
