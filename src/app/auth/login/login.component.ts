@@ -11,6 +11,7 @@ import { AuthService } from './../../services/auth.service';
 export class LoginComponent implements OnInit {
 
   user = new User();
+  erreur = 0;
 
   constructor(private router: Router, private authService: AuthService){}
 
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
     if(isValide){
       this.router.navigate(['produits']);
     }else{
-      alert("Veuillez vérifier vos paramètres de connexion");
+      this.erreur = 1;
     }
 
   }
