@@ -46,4 +46,13 @@ export class AuthService implements OnInit {
     return (this.roles.indexOf('ADMIN') > -1);
 
   }
+
+  onLogout(): void {
+    this.loggedUser = '';
+    this.isLoggedIn = false;
+    this.roles = [];
+    localStorage.removeItem('loggedUser');
+    localStorage.setItem('isloggedIn',String(this.isLoggedIn));
+    this.router.navigate(['/login']);
+  }
 }
