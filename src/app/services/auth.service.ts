@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 export class AuthService implements OnInit {
   users: User[] = [
     { username: 'admin', password: '123', roles: ['ADMIN'] },
-    { username: 'nadhem', password: '123', roles: ['USER'] },
+    { username: 'djibba', password: '123', roles: ['USER'] },
   ];
 
   public loggedUser!: string;
@@ -35,5 +35,15 @@ export class AuthService implements OnInit {
       }
     });
     return validUser;
+  }
+
+  isAdmin(): Boolean{
+
+    if(!this.roles){
+      return false;
+    }
+
+    return (this.roles.indexOf('ADMIN') > -1);
+
   }
 }

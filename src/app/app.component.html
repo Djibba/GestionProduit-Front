@@ -24,7 +24,7 @@
             Produits
           </a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" routerLink="/add-produit">Ajouter</a>
+            <a *ngIf="authService.isAdmin()" class="dropdown-item" routerLink="/add-produit">Ajouter</a>
             <a class="dropdown-item" href="#">Lister</a>
             <a class="dropdown-item" routerLink="/rechercheParCategorie">Rechercher par categorie</a>
             <a class="dropdown-item" routerLink="/rechercheParNom">Rechercher par nom</a>
@@ -33,6 +33,7 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
+        <li> <a class="nav-link">{{authService.loggedUser}}</a></li>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
