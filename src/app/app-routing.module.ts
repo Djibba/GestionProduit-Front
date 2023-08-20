@@ -7,16 +7,19 @@ import { RechercheParCategorieComponent } from './recherche-par-categorie/recher
 import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
 import { ListerCategoriesComponent } from './lister-categories/lister-categories.component';
 import { LoginComponent } from './auth/login/login.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { ProduitGuard } from './guards/produit.guard';
 
 const routes: Routes = [
   { path: 'produits', component: ProduitsComponent },
-  { path: 'add-produit', component: AddProduitComponent },
+  { path: 'add-produit', component: AddProduitComponent, canActivate: [ProduitGuard] },
   { path: '', redirectTo: 'produits', pathMatch: 'full' },
   { path: 'updateProduit/:id', component: UpdateProduitComponent},
   { path: 'rechercheParCategorie', component: RechercheParCategorieComponent},
   { path: 'rechercheParNom', component: RechercheParNomComponent},
   { path: 'listeCategories', component: ListerCategoriesComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'forbidden', component: ForbiddenComponent},
 ];
 
 @NgModule({

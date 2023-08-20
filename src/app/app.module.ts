@@ -14,6 +14,7 @@ import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { ListerCategoriesComponent } from './lister-categories/lister-categories.component';
 import { UpdateCategorieComponent } from './update-categorie/update-categorie.component';
 import { LoginComponent } from './auth/login/login.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LoginComponent } from './auth/login/login.component';
     SearchFilterPipe,
     ListerCategoriesComponent,
     UpdateCategorieComponent,
-    LoginComponent
+    LoginComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,
