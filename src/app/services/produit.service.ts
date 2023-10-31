@@ -6,6 +6,7 @@ import { Produit } from './../model/produit.model';
 import { Categorie } from './../model/categorie.model';
 import { apiUrl, apiUrlCat } from '../config';
 import { CategorieWrapped } from './../model/categorieWrapped.model';
+import { Image } from './../model/image.model';
 
 const httpOptions = {
   headers: new HttpHeaders( {'Content-Type': 'application/json'} )
@@ -84,5 +85,16 @@ export class ProduitService {
 
     rechercheParNom(nom:string): Observable<Produit[]> {
       return this.http.get<Produit[]>(apiUrl + `/prodsByNom/${nom}`);
+    }
+
+    // image
+    uploadImage(file: File,filename: string): Observable<Image> {
+      const formData: FormData = new FormData();
+      formData.append('image', file, filename);
+      return this.http.post<Image>(apiUrl + '/image/upload', formData);
+    }
+
+    loadImage(id:number): Observable<Image> {
+      return this.http.get<Image>(apiUrl + `/image/get/info/${id}`);
     }
 }
