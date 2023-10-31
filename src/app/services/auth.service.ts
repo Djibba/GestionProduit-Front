@@ -37,14 +37,26 @@ export class AuthService implements OnInit {
     return validUser;
   }
 
-  isAdmin(): Boolean{
-
-    if(!this.roles){
+  isAdmin(): Boolean {
+    if (!this.roles) {
       return false;
     }
 
-    return (this.roles.indexOf('ADMIN') > -1);
+    return this.roles.indexOf('ADMIN') > -1;
+  }
 
+  setLoggedUserFromLocalStorage(login: string) {
+    this.loggedUser = login;
+    this.isLoggedIn = true;
+    this.getUserRoles(login);
+  }
+
+  getUserRoles(login: string) {
+    this.users.forEach((curUser) => {
+      if (login === curUser.username) {
+        this.roles = curUser.roles;
+      }
+    });
   }
 
   onLogout(): void {
@@ -52,7 +64,7 @@ export class AuthService implements OnInit {
     this.isLoggedIn = false;
     this.roles = [];
     localStorage.removeItem('loggedUser');
-    localStorage.setItem('isloggedIn',String(this.isLoggedIn));
+    localStorage.setItem('isloggedIn', String(this.isLoggedIn));
     this.router.navigate(['/login']);
   }
 }

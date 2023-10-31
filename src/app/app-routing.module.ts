@@ -12,14 +12,14 @@ import { ProduitGuard } from './guards/produit.guard';
 
 const routes: Routes = [
   { path: 'produits', component: ProduitsComponent },
-  { path: 'add-produit', component: AddProduitComponent, canActivate: [ProduitGuard] },
+  { path: 'add-produit', component: AddProduitComponent}, //, canActivate: [ProduitGuard]
   { path: '', redirectTo: 'produits', pathMatch: 'full' },
   { path: 'updateProduit/:id', component: UpdateProduitComponent},
   { path: 'rechercheParCategorie', component: RechercheParCategorieComponent},
   { path: 'rechercheParNom', component: RechercheParNomComponent},
   { path: 'listeCategories', component: ListerCategoriesComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'forbidden', component: ForbiddenComponent},
+  { path: 'app-forbidden', component: ForbiddenComponent}
 ];
 
 @NgModule({
