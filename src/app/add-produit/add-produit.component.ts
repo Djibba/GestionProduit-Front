@@ -49,7 +49,7 @@ export class AddProduitComponent implements OnInit {
           this.newProduit.image = img;
           this.newProduit.categorie = this.categories?.find(cat => cat.idCat == this.newIdCat)  ;
 
-          this.produitService.ajouterProduit(this.newProduit).subscribe(prod => {
+          this.produitService.ajouterProduit(this.newProduit).subscribe( () => {
             this.router.navigate(['produits']);
           });
 

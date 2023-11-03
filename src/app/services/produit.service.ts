@@ -7,6 +7,7 @@ import { Categorie } from './../model/categorie.model';
 import { apiUrl, apiUrlCat } from '../config';
 import { CategorieWrapped } from './../model/categorieWrapped.model';
 import { Image } from './../model/image.model';
+import { apiUrlimage } from './../config';
 
 const httpOptions = {
   headers: new HttpHeaders( {'Content-Type': 'application/json'} )
@@ -89,12 +90,12 @@ export class ProduitService {
 
     // image
     uploadImage(file: File,filename: string): Observable<Image> {
-      const formData: FormData = new FormData();
+      const formData = new FormData();
       formData.append('image', file, filename);
-      return this.http.post<Image>(apiUrl + '/image/upload', formData);
+      return this.http.post<Image>(apiUrlimage + '/upload', formData);
     }
 
     loadImage(id:number): Observable<Image> {
-      return this.http.get<Image>(apiUrl + `/image/get/info/${id}`);
+      return this.http.get<Image>(apiUrlimage + `/get/info/${id}`);
     }
 }
