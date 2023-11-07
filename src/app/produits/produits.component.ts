@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Produit } from './../model/produit.model';
 import { ProduitService } from './../services/produit.service';
 import { AuthService } from './../services/auth.service';
+import { Image } from './../model/image.model';
 
 @Component({
   selector: 'app-produits',
@@ -23,9 +24,12 @@ export class ProduitsComponent implements OnInit {
     this.produitService.listeProduits().subscribe(
       produits => {
         this.produits = produits;
-      },
-      (error) => {
-        console.log(error);
+        this.produits.forEach(produit => {
+          this.produitService.loadImage(produit.image.idImage).subscribe((img: Image) => {
+            produit.imageString = 'data:' + img.typeImage + ';base64,' + img.image;
+          });
+        }
+        );
       }
     );
   }

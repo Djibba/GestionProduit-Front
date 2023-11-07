@@ -15,6 +15,8 @@ export class UpdateProduitComponent implements OnInit {
   categories!: Categorie[];
   updatedCatId!: number;
   myImage!: string;
+  uploadedImage!: File;
+    imagePath!: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -49,4 +51,13 @@ export class UpdateProduitComponent implements OnInit {
       this.router.navigate(['produits']);
     });
   }
+
+  // onImageUpload(event: any) {
+  //   this.uploadedImage = event.target.files[0];
+  //   var reader = new FileReader();
+  //   reader.readAsDataURL(this.uploadedImage);
+  //   reader.onload = (_event) => {
+  //     this.imagePath = reader.result;
+  //   }
+  // }
 }
