@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProduitService } from '../services/produit.service';
 import { Produit } from '../model/produit.model';
 import { Categorie } from './../model/categorie.model';
+import { Image } from './../model/image.model';
 
 @Component({
   selector: 'app-update-produit',
@@ -13,6 +14,7 @@ export class UpdateProduitComponent implements OnInit {
   currentProduit = new Produit();
   categories!: Categorie[];
   updatedCatId!: number;
+  myImage!: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,7 +31,15 @@ export class UpdateProduitComponent implements OnInit {
       .subscribe((prod) => {
         this.currentProduit = prod;
         this.updatedCatId = this.currentProduit.categorie!.idCat;
+
+        this.produitService
+          .loadImage(this.currentProduit.image.idImage).subscribe((img: Image) => {
+            this.myImage = 'data:' + img.typeImage + ';base64,' + img.image;
+          }
+        );
       });
+
+
 
   }
 
