@@ -77,4 +77,8 @@ export class UpdateProduitComponent implements OnInit {
       };
     }
   }
+
+  onAddImageProduit(){
+
+  }
 }
