@@ -9,5 +9,5 @@ export class Produit {
   categorie?: Categorie;
   image! : Image;
   imageString! : string;
-  images! : Image[];
+  images : Image[] = [];
 }

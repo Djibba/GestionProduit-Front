@@ -98,4 +98,10 @@ export class ProduitService {
     loadImage(id:number): Observable<Image> {
       return this.http.get<Image>(apiUrlimage + `/get/info/${id}`);
     }
+
+    uploadImageProduit(file: File,filename: string, idProd: number): Observable<any> {
+      const formData = new FormData();
+      formData.append('image', file, filename);
+      return this.http.post(apiUrlimage + `/uploadImageProd/${idProd}`, formData);
+    }
 }

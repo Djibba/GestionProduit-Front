@@ -4,6 +4,7 @@ import { ProduitService } from '../services/produit.service';
 import { Produit } from '../model/produit.model';
 import { Categorie } from './../model/categorie.model';
 import { Image } from './../model/image.model';
+import { VirtualTimeScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-update-produit',
@@ -28,17 +29,23 @@ export class UpdateProduitComponent implements OnInit {
     this.produitService.listerCategories().subscribe((cats) => {
       this.categories = cats._embedded.categories;
     });
+    // this.produitService
+    //   .consulterProduit(this.activatedRoute.snapshot.params['id'])
+    //   .subscribe((prod) => {
+    //     this.currentProduit = prod;
+    //     this.updatedCatId = this.currentProduit.categorie!.idCat;
+
+    //     this.produitService
+    //       .loadImage(this.currentProduit.image.idImage)
+    //       .subscribe((img: Image) => {
+    //         this.myImage = 'data:' + img.typeImage + ';base64,' + img.image;
+    //       });
+    //   });
     this.produitService
       .consulterProduit(this.activatedRoute.snapshot.params['id'])
       .subscribe((prod) => {
         this.currentProduit = prod;
         this.updatedCatId = this.currentProduit.categorie!.idCat;
-
-        this.produitService
-          .loadImage(this.currentProduit.image.idImage)
-          .subscribe((img: Image) => {
-            this.myImage = 'data:' + img.typeImage + ';base64,' + img.image;
-          });
       });
   }
 
@@ -47,22 +54,28 @@ export class UpdateProduitComponent implements OnInit {
       (cat) => (cat.idCat = this.updatedCatId)
     )!;
 
-    if (this.isImageUpdated) {
-      this.produitService
-        .uploadImage(this.uploadedImage, this.uploadedImage.name)
-        .subscribe((img: Image) => {
-          this.currentProduit.image = img;
-          this.produitService.updateProduit(this.currentProduit).subscribe((prod) => {
-            this.router.navigate(['produits']);
-          }
-          );
-        });
-    } else {
-      this.produitService.updateProduit(this.currentProduit).subscribe((prod) => {
-        this.router.navigate(['produits']);
-      });
-    }
+    // if (this.isImageUpdated) {
+    //   this.produitService
+    //     .uploadImage(this.uploadedImage, this.uploadedImage.name)
+    //     .subscribe((img: Image) => {
+    //       this.currentProduit.image = img;
+    //       this.produitService
+    //         .updateProduit(this.currentProduit)
+    //         .subscribe((prod) => {
+    //           this.router.navigate(['produits']);
+    //         });
+    //     });
+    // } else {
+    //   this.produitService
+    //     .updateProduit(this.currentProduit)
+    //     .subscribe((prod) => {
+    //       this.router.navigate(['produits']);
+    //     });
+    // }
 
+    this.produitService.updateProduit(this.currentProduit).subscribe((prod) => {
+      this.router.navigate(['produits']);
+    });
 
   }
 
@@ -78,7 +91,15 @@ export class UpdateProduitComponent implements OnInit {
     }
   }
 
-  onAddImageProduit(){
-
+  onAddImageProduit() {
+    this.produitService
+      .uploadImageProduit(
+        this.uploadedImage,
+        this.uploadedImage.name,
+        this.currentProduit.idProduit!
+      )
+      .subscribe((img: Image) => {
+        this.currentProduit.images.push(img);
+      });
   }
 }
